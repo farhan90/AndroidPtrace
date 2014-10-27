@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">AndroidPtrace</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_display_active_process">DisplayActiveProcess</string>
+    <string name="action_settings">Settings</string>
+    <string name="ptrace_traceme">PTRACE_TRACEME</string>
+    <string name="ptrace_peekuser">PTACE_PEEKUSER</string>
+
+</resources>
