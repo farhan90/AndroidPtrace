@@ -55,6 +55,7 @@ public class MySimpleAdapter extends ArrayAdapter {
             	Log.d(ap.getName(), ""+ap.getPid());
         		Intent intent= new Intent(context,DisplayActiveProcess.class);
         		intent.putExtra("AppID", ap.getPid());
+        		intent.putExtra("AppName", ap.getName());
         	    context.startActivity(intent);
             }
         });

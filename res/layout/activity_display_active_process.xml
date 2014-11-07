@@ -9,29 +9,51 @@
     tools:context="com.example.androidptrace.DisplayActiveProcess" >
 
     <TextView
+        android:id="@+id/appName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/pidValue"
         android:padding="10dp"
- 		android:textSize="16sp"></TextView>
-    
+        android:textSize="16sp" >
+    </TextView>
+    <TextView
+        android:id="@+id/pidValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/appName"
+        android:padding="10dp"
+        android:textSize="16sp" >
+    </TextView>
+
     <RadioGroup
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:layout_below="@+id/pidValue">
-    <RadioButton android:id="@+id/ptrace_traceme"
+        android:id="@+id/radioGroup1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pidValue"
+        android:orientation="vertical" >
+
+        <RadioButton
+            android:id="@+id/ptrace_traceme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onRadioButtonClicked"
+            android:text="@string/ptrace_traceme" />
+
+        <RadioButton
+            android:id="@+id/ptrace_peekuser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onRadioButtonClicked"
+            android:text="@string/ptrace_peekuser" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/traceButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/ptrace_traceme"
-        android:onClick="onRadioButtonClicked"/>
-    <RadioButton android:id="@+id/ptrace_peekuser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/ptrace_peekuser"
-        android:onClick="onRadioButtonClicked"/>
-</RadioGroup>
-    
+        android:layout_alignLeft="@+id/radioGroup1"
+        android:layout_below="@+id/radioGroup1"
+        android:layout_marginTop="44dp"
+        android:text="Trace"
+        android:onClick="onTraceButtonClicked"/>
+
 </RelativeLayout>
-
-
