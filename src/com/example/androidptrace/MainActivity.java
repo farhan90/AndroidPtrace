@@ -51,25 +51,25 @@ public class MainActivity extends Activity {
 		
 		
 		
-		Context context = getApplicationContext();
-		CharSequence text = stringTest();
-		int duration = Toast.LENGTH_SHORT;
-
-		Toast toast = Toast.makeText(context, text, duration);
-		toast.show();
+//		Context context = getApplicationContext();
+//		CharSequence text = stringTest();
+//		int duration = Toast.LENGTH_SHORT;
+//
+//		Toast toast = Toast.makeText(context, text, duration);
+//		toast.show();
 	}
 	
-	public native String  stringTest();
-
-    /* this is used to load the 'hello-jni' library on application
-     * startup. The library has already been unpacked into
-     * /data/data/com.example.hellojni/lib/libhello-jni.so at
-     * installation time by the package manager.
-     */
-    static {
-        System.loadLibrary("ptrace");
-    }
-	
+//	public native String  stringTest();
+//
+//    /* this is used to load the 'hello-jni' library on application
+//     * startup. The library has already been unpacked into
+//     * /data/data/com.example.hellojni/lib/libhello-jni.so at
+//     * installation time by the package manager.
+//     */
+//    static {
+//        System.loadLibrary("");
+//    }
+//	
 	
 	
 	
