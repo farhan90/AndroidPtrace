@@ -1,1 +1,4 @@
 bin/*
+project.properties
+libs/*
+gen/*
