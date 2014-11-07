@@ -2,3 +2,8 @@ bin/*
 project.properties
 libs/*
 gen/*
+/obj/
+/libs/
+.classpath
+gen/
+
