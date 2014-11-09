@@ -6,4 +6,6 @@ gen/*
 /libs/
 .classpath
 gen/
+*.py
+
 
