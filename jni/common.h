@@ -11,6 +11,8 @@
 #include <string.h>
 #define LOG_TAG "AndroidPtrace"
 #define TOTAL_SYSCALL_X86 444
+#define MAX_SYSCALL_ARGS 6
+
 
 
 
@@ -18,13 +20,14 @@ struct syscall_info{
 	char name[150];
 	int num_args;
 
+
 };
 
 struct syscall_info *syscall_table[TOTAL_SYSCALL_X86];
 
 //Methods
-
 void cleanup_syscall_tabel();
 void parse_system_call_name(char* filename);
 void print_syscall(int pid);
 int trace_syscall(int pid);
+void get_return_value(int pid);
