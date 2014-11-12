@@ -10,7 +10,9 @@
 #define filename "syscall64_out.txt"
 #endif
 
-
+#ifdef __arm__
+#define filename "syscall_arm_out.txt"
+#endif
 
 
 /**
@@ -20,7 +22,9 @@
 
 int main(int argc, char **argv){
 
-	parse_system_call_name("syscall64_out.txt");
+	printf("The filename is %s\n",filename);
+
+	parse_system_call_name(filename);
 
 	int pid;
 	int i = 1;
@@ -50,12 +54,16 @@ int main(int argc, char **argv){
 	while(1){
 		if(trace_syscall(pid)!=0)
 			break;
-		print_syscall(pid);
+#ifdef __arm__
+		print_syscall_arm(pid);
 
-		if(trace_syscall(pid)!=0)
-			break;
-		get_return_value(pid);
+//		print_syscall(pid);
+//
+//		if(trace_syscall(pid)!=0)
+//			break;
+//		get_return_value(pid);
 
+#endif
 	}
 	cleanup_syscall_tabel();
 	return 0;

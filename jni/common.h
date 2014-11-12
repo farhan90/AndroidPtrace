@@ -48,6 +48,6 @@ void parse_system_call_name(char* filename);
 void print_syscall(int pid);
 int trace_syscall(int pid);
 void get_return_value(int pid);
-
+void print_syscall_arm(int pid);
 
 

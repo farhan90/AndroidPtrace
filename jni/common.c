@@ -1,6 +1,24 @@
 #include "common.h"
 
+#ifdef __arm__
 
+void print_syscall_arm(int pid){
+		struct user_regs u_in;
+		int syscall;
+		int i=0;
+		if(ptrace(PTRACE_GETREGS,pid,NULL,&u_in)<0){
+			printf("Ptrace get regs in function print syscall failed\n");
+			__android_log_print(ANDROID_LOG_INFO,LOG_TAG,"Ptrace get regs in function print syscall failed\n");
+			return;
+		}
+		syscall=u_in.uregs[7];
+		struct syscall_info *info=syscall_table[syscall];
+		printf("The syscall number is %ld\n",u_in.uregs[7]);
+		printf("The syscall name is %s and number is %ld \n",info->name,u_in.uregs[7]);
+		__android_log_print(ANDROID_LOG_INFO,LOG_TAG,"The syscall name is %s and number is %ld\n",info->name,u_in.uregs[7]);
+}
+
+#else
 void get_syscall_args(int argnum,struct user_regs_struct *u_in){
 	switch (argnum){
 		case 0:
@@ -73,6 +91,40 @@ void get_return_value(int pid){
 }
 
 
+
+
+void print_syscall(int pid){
+	struct user_regs_struct u_in;
+	int syscall;
+	int i=0;
+	if(ptrace(PTRACE_GETREGS,pid,NULL,&u_in)<0){
+		printf("Ptrace get regs in function print syscall failed\n");
+		__android_log_print(ANDROID_LOG_INFO,LOG_TAG,"Ptrace get regs in function print syscall failed\n");
+		return;
+	}
+#ifdef __i386__
+	syscall=u_in.orig_eax;
+	struct syscall_info *info=syscall_table[syscall];
+	printf("The syscall name is %s and number is %ld \n",info->name,u_in.orig_eax);
+	__android_log_print(ANDROID_LOG_INFO,LOG_TAG,"The syscall name is %s and number is %ld\n",info->name,u_in.orig_eax);
+#endif
+
+#ifdef __x86_64__
+	syscall=u_in.orig_rax;
+	struct syscall_info *info=syscall_table[syscall];
+	printf("The syscall name is %s and number is %ld \n",info->name,u_in.orig_rax);
+	__android_log_print(ANDROID_LOG_INFO,LOG_TAG,"The syscall name is %s and number is %ld\n",info->name,u_in.orig_rax);
+
+#endif
+
+	for(i=0;i<info->num_args;i++){
+			get_syscall_args(i,&u_in);
+	}
+
+}
+
+#endif /*Main end if*/
+
 void cleanup_syscall_tabel(){
 	int i=0;
 	for (i=0;i<TOTAL_SYSCALL;i++){
@@ -115,36 +167,6 @@ void parse_system_call_name(char *filename){
 
 }
 
-void print_syscall(int pid){
-	struct user_regs_struct u_in;
-	int syscall;
-	int i=0;
-	if(ptrace(PTRACE_GETREGS,pid,NULL,&u_in)<0){
-		printf("Ptrace get regs in function print syscall failed\n");
-		__android_log_print(ANDROID_LOG_INFO,LOG_TAG,"Ptrace get regs in function print syscall failed\n");
-		return;
-	}
-#ifdef __i386__
-	syscall=u_in.orig_eax;
-	struct syscall_info *info=syscall_table[syscall];
-	printf("The syscall name is %s and number is %ld \n",info->name,u_in.orig_eax);
-	__android_log_print(ANDROID_LOG_INFO,LOG_TAG,"The syscall name is %s and number is %ld\n",info->name,u_in.orig_eax);
-#endif
-
-#ifdef __x86_64__
-	syscall=u_in.orig_rax;
-	struct syscall_info *info=syscall_table[syscall];
-	printf("The syscall name is %s and number is %ld \n",info->name,u_in.orig_rax);
-	__android_log_print(ANDROID_LOG_INFO,LOG_TAG,"The syscall name is %s and number is %ld\n",info->name,u_in.orig_rax);
-
-#endif
-
-	for(i=0;i<info->num_args;i++){
-			get_syscall_args(i,&u_in);
-	}
-
-}
-
 
 int trace_syscall(int pid){
 	int stat;
@@ -163,6 +185,4 @@ int trace_syscall(int pid){
 	}
 
 }
-
-
 

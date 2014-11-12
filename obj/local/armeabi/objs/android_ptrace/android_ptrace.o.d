@@ -4,7 +4,7 @@ obj/local/armeabi/objs/android_ptrace/android_ptrace.o: \
  /Users/farhan/softwares/android-ndk/ndk/platforms/android-21/arch-arm/usr/include/sys/cdefs.h \
  /Users/farhan/softwares/android-ndk/ndk/platforms/android-21/arch-arm/usr/include/sys/cdefs_elf.h \
  /Users/farhan/softwares/android-ndk/ndk/platforms/android-21/arch-arm/usr/include/android/api-level.h \
- jni/PtraceLibJNI.h \
+ jni/PtraceLibJNI.h jni/common.h \
  /Users/farhan/softwares/android-ndk/ndk/platforms/android-21/arch-arm/usr/include/sys/ptrace.h \
  /Users/farhan/softwares/android-ndk/ndk/platforms/android-21/arch-arm/usr/include/sys/types.h \
  /Users/farhan/softwares/android-ndk/ndk/platforms/android-21/arch-arm/usr/include/stdint.h \
@@ -74,6 +74,8 @@ obj/local/armeabi/objs/android_ptrace/android_ptrace.o: \
 /Users/farhan/softwares/android-ndk/ndk/platforms/android-21/arch-arm/usr/include/android/api-level.h:
 
 jni/PtraceLibJNI.h:
+
+jni/common.h:
 
 /Users/farhan/softwares/android-ndk/ndk/platforms/android-21/arch-arm/usr/include/sys/ptrace.h:
 

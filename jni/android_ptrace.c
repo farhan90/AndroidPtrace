@@ -50,15 +50,15 @@ JNIEXPORT jint JNICALL Java_com_example_androidptrace_PtraceLib_syscall_1trace
 
 
 
-	while(1){
-		if(trace_syscall(pid)!=0)
-			break;
-		print_syscall(pid);
-
-		if(trace_syscall(pid)!=0)
-			break;
-		get_return_value(pid);
-	}
+//	while(1){
+//		if(trace_syscall(pid)!=0)
+//			break;
+//		print_syscall(pid);
+//
+//		if(trace_syscall(pid)!=0)
+//			break;
+//		get_return_value(pid);
+//	}
 
 	return 0;
 }
