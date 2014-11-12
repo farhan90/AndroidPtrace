@@ -56,13 +56,11 @@ int main(int argc, char **argv){
 			break;
 #ifdef __arm__
 		print_syscall_arm(pid);
-
-//		print_syscall(pid);
-//
-//		if(trace_syscall(pid)!=0)
-//			break;
-//		get_return_value(pid);
-
+#else
+		print_syscall(pid);
+		if(trace_syscall(pid)!=0)
+			break;
+		get_return_value(pid);
 #endif
 	}
 	cleanup_syscall_tabel();
