@@ -1,17 +1,6 @@
 #include <jni.h>
 #include "PtraceLibJNI.h"
-#include <sys/ptrace.h>
-#include <sys/types.h>
-#include <unistd.h>
-#include <sys/user.h>
-#include <sys/wait.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <sys/reg.h>
-#include <android/log.h>
-#include <errno.h>
-#define LOG_TAG "AndroidPtrace"
-
+#include "common.h"
 
 
 
@@ -45,7 +34,6 @@ JNIEXPORT jint JNICALL Java_com_example_androidptrace_PtraceLib_syscall_1trace
 	__android_log_print(ANDROID_LOG_INFO,LOG_TAG,"inside the JNI");
 	jint stat=0;
 	jint res=0;
-	struct user_regs_struct u_in;
 	long syscall;
 	__android_log_print(ANDROID_LOG_INFO,LOG_TAG,"Attaching to process %d\n",pid);
 
@@ -62,17 +50,15 @@ JNIEXPORT jint JNICALL Java_com_example_androidptrace_PtraceLib_syscall_1trace
 
 
 
-//	while(1){
-//		if(wait_for_syscall(pid)!=0)
-//			break;
-//		syscall = ptrace(PTRACE_PEEKUSER, pid, sizeof(long)*ORIG_EAX);
-//		if(syscall<0){
-//			__android_log_print(ANDROID_LOG_INFO,LOG_TAG,"The errno is %d\n",errno);
-//			break;
-//
-//		}
-//		__android_log_print(ANDROID_LOG_INFO,LOG_TAG,"The process made a system call %ld\n",syscall);
-//	}
+	while(1){
+		if(trace_syscall(pid)!=0)
+			break;
+		print_syscall(pid);
+
+		if(trace_syscall(pid)!=0)
+			break;
+		get_return_value(pid);
+	}
 
 	return 0;
 }

@@ -4,42 +4,42 @@
 void get_syscall_args(int argnum,struct user_regs_struct *u_in){
 	switch (argnum){
 		case 0:
-#ifdef __x86__
+#ifdef __i386__
 			printf("The value of first argument %08lx\n",u_in->ebx);
 #elif __x86_64__
 			printf("The value of first argument %08lx\n",u_in->rdi);
 #endif
 			break;
 		case 1:
-#ifdef __x86__
+#ifdef __i386__
 			printf("The value of second argument %08lx\n",u_in->ecx);
 #elif __x86_64__
 			printf("The value of second argument %08lx\n",u_in->rsi);
 #endif
 			break;
 		case 2:
-#ifdef __x86__
+#ifdef __i386__
 			printf("The value of third argument %08lx\n",u_in->edx);
 #elif __x86_64__
 			printf("The value of third argument %08lx\n",u_in->rdx);
 #endif
 			break;
 		case 3:
-#ifdef __x86__
+#ifdef __i386__
 			printf("The value of fourth argument %08lx\n",u_in->esi);
 #elif __x86_64__
 			printf("The value of fourth argument %08lx\n",u_in->r10);
 #endif
 			break;
 		case 4:
-#ifdef __x86__
+#ifdef __i386__
 			printf("The value of fifth argument %08lx\n",u_in->edi);
 #elif __x86_64__
 			printf("The value of fifth argument %08lx\n",u_in->r8);
 #endif
 			break;
 		case 5:
-#ifdef __x86__
+#ifdef __i386__
 			printf("The value of sixth argument %08lx\n",u_in->ebp);
 #elif __x86_64__
 			printf("The value of sixth argument %08lx\n",u_in->r9);
@@ -60,7 +60,7 @@ void get_return_value(int pid){
 			__android_log_print(ANDROID_LOG_INFO,LOG_TAG,"Ptrace get regs in function get return value failed\n");
 			return;
 		}
-#ifdef __x86__
+#ifdef __i386__
 	printf("The return value is %ld\n\n",u_in.eax);
 	__android_log_print(ANDROID_LOG_INFO,LOG_TAG,"The return value is %ld\n",u_in.orig_eax);
 #endif
@@ -124,14 +124,11 @@ void print_syscall(int pid){
 		__android_log_print(ANDROID_LOG_INFO,LOG_TAG,"Ptrace get regs in function print syscall failed\n");
 		return;
 	}
-#ifdef __x86__
+#ifdef __i386__
 	syscall=u_in.orig_eax;
 	struct syscall_info *info=syscall_table[syscall];
 	printf("The syscall name is %s and number is %ld \n",info->name,u_in.orig_eax);
 	__android_log_print(ANDROID_LOG_INFO,LOG_TAG,"The syscall name is %s and number is %ld\n",info->name,u_in.orig_eax);
-
-
-
 #endif
 
 #ifdef __x86_64__

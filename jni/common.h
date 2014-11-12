@@ -14,14 +14,18 @@
 
 #define LOG_TAG "AndroidPtrace"
 
-#ifdef __x86__
+#ifdef __i386__
 #define TOTAL_SYSCALL 444
 #endif
+
 
 #ifdef __x86_64__
 #define TOTAL_SYSCALL 316
 #endif
 
+#ifdef __arm__
+#define TOTAL_SYSCALL 444
+#endif
 
 #define MAX_SYSCALL_ARGS 6
 

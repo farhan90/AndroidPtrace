@@ -1,1 +1,1 @@
-APP_ABI := x86_64
+APP_ABI := x86 x86_64

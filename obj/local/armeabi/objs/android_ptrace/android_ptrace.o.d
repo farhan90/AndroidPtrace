@@ -62,7 +62,8 @@ obj/local/armeabi/objs/android_ptrace/android_ptrace.o: \
  /Users/farhan/softwares/android-ndk/ndk/platforms/android-21/arch-arm/usr/include/strings.h \
  /Users/farhan/softwares/android-ndk/ndk/platforms/android-21/arch-arm/usr/include/memory.h \
  /Users/farhan/softwares/android-ndk/ndk/platforms/android-21/arch-arm/usr/include/stdio.h \
- /Users/farhan/softwares/android-ndk/ndk/platforms/android-21/arch-arm/usr/include/sys/reg.h
+ /Users/farhan/softwares/android-ndk/ndk/platforms/android-21/arch-arm/usr/include/sys/reg.h \
+ /Users/farhan/softwares/android-ndk/ndk/platforms/android-21/arch-arm/usr/include/android/log.h
 
 /Users/farhan/softwares/android-ndk/ndk/platforms/android-21/arch-arm/usr/include/jni.h:
 
@@ -189,3 +190,5 @@ jni/PtraceLibJNI.h:
 /Users/farhan/softwares/android-ndk/ndk/platforms/android-21/arch-arm/usr/include/stdio.h:
 
 /Users/farhan/softwares/android-ndk/ndk/platforms/android-21/arch-arm/usr/include/sys/reg.h:
+
+/Users/farhan/softwares/android-ndk/ndk/platforms/android-21/arch-arm/usr/include/android/log.h:

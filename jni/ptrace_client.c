@@ -2,13 +2,15 @@
 #include "PtraceLibJNI.h"
 #include "common.h"
 
-#ifdef __86__
+#ifdef __i386__
 #define filename "syscall_output.txt"
 #endif
 
 #ifdef __x86_64__
 #define filename "syscall64_out.txt"
 #endif
+
+
 
 
 /**
