@@ -1,9 +1,81 @@
 #include "common.h"
 
 
+void get_syscall_args(int argnum,struct user_regs_struct *u_in){
+	switch (argnum){
+		case 0:
+#ifdef __x86__
+			printf("The value of first argument %08lx\n",u_in->ebx);
+#elif __x86_64__
+			printf("The value of first argument %08lx\n",u_in->rdi);
+#endif
+			break;
+		case 1:
+#ifdef __x86__
+			printf("The value of second argument %08lx\n",u_in->ecx);
+#elif __x86_64__
+			printf("The value of second argument %08lx\n",u_in->rsi);
+#endif
+			break;
+		case 2:
+#ifdef __x86__
+			printf("The value of third argument %08lx\n",u_in->edx);
+#elif __x86_64__
+			printf("The value of third argument %08lx\n",u_in->rdx);
+#endif
+			break;
+		case 3:
+#ifdef __x86__
+			printf("The value of fourth argument %08lx\n",u_in->esi);
+#elif __x86_64__
+			printf("The value of fourth argument %08lx\n",u_in->r10);
+#endif
+			break;
+		case 4:
+#ifdef __x86__
+			printf("The value of fifth argument %08lx\n",u_in->edi);
+#elif __x86_64__
+			printf("The value of fifth argument %08lx\n",u_in->r8);
+#endif
+			break;
+		case 5:
+#ifdef __x86__
+			printf("The value of sixth argument %08lx\n",u_in->ebp);
+#elif __x86_64__
+			printf("The value of sixth argument %08lx\n",u_in->r9);
+#endif
+			break;
+
+
+	}
+}
+
+
+
+void get_return_value(int pid){
+	struct user_regs_struct u_in;
+
+	if(ptrace(PTRACE_GETREGS,pid,NULL,&u_in)<0){
+			printf("Ptrace get regs in function get return value failed\n");
+			__android_log_print(ANDROID_LOG_INFO,LOG_TAG,"Ptrace get regs in function get return value failed\n");
+			return;
+		}
+#ifdef __x86__
+	printf("The return value is %ld\n\n",u_in.eax);
+	__android_log_print(ANDROID_LOG_INFO,LOG_TAG,"The return value is %ld\n",u_in.orig_eax);
+#endif
+
+#ifdef __x86_64__
+	printf("The return value is %ld\n\n",u_in.rax);
+	__android_log_print(ANDROID_LOG_INFO,LOG_TAG,"The return value is %ld\n",u_in.orig_rax);
+#endif
+
+}
+
+
 void cleanup_syscall_tabel(){
 	int i=0;
-	for (i=0;i<TOTAL_SYSCALL_X86;i++){
+	for (i=0;i<TOTAL_SYSCALL;i++){
 		free(syscall_table[i]);
 	}
 }
@@ -43,32 +115,6 @@ void parse_system_call_name(char *filename){
 
 }
 
-
-void get_syscall_args(int argnum,struct user_regs_struct *u_in){
-	switch (argnum){
-		case 0:
-			printf("The value of first argument %08lx\n",u_in->ebx);
-			break;
-		case 1:
-			printf("The value of second argument %08lx\n",u_in->ecx);
-			break;
-		case 2:
-			printf("The value of third argument %08lx\n",u_in->edx);
-			break;
-		case 3:
-			printf("The value of fourth argument %08lx\n",u_in->esi);
-			break;
-		case 4:
-			printf("The value of fifth argument %08lx\n",u_in->edi);
-			break;
-		case 5:
-			printf("The value of sixth argument %08lx\n",u_in->ebp);
-			break;
-
-
-	}
-}
-
 void print_syscall(int pid){
 	struct user_regs_struct u_in;
 	int syscall;
@@ -78,30 +124,30 @@ void print_syscall(int pid){
 		__android_log_print(ANDROID_LOG_INFO,LOG_TAG,"Ptrace get regs in function print syscall failed\n");
 		return;
 	}
+#ifdef __x86__
 	syscall=u_in.orig_eax;
 	struct syscall_info *info=syscall_table[syscall];
 	printf("The syscall name is %s and number is %ld \n",info->name,u_in.orig_eax);
 	__android_log_print(ANDROID_LOG_INFO,LOG_TAG,"The syscall name is %s and number is %ld\n",info->name,u_in.orig_eax);
 
+
+
+#endif
+
+#ifdef __x86_64__
+	syscall=u_in.orig_rax;
+	struct syscall_info *info=syscall_table[syscall];
+	printf("The syscall name is %s and number is %ld \n",info->name,u_in.orig_rax);
+	__android_log_print(ANDROID_LOG_INFO,LOG_TAG,"The syscall name is %s and number is %ld\n",info->name,u_in.orig_rax);
+
+#endif
+
 	for(i=0;i<info->num_args;i++){
-		get_syscall_args(i,&u_in);
+			get_syscall_args(i,&u_in);
 	}
 
-
 }
 
-void get_return_value(int pid){
-	struct user_regs_struct u_in;
-
-	if(ptrace(PTRACE_GETREGS,pid,NULL,&u_in)<0){
-			printf("Ptrace get regs in function get return value failed\n");
-			__android_log_print(ANDROID_LOG_INFO,LOG_TAG,"Ptrace get regs in function get return value failed\n");
-			return;
-		}
-
-	printf("The return value is %ld\n\n",u_in.eax);
-	__android_log_print(ANDROID_LOG_INFO,LOG_TAG,"The return value is %ld\n",u_in.orig_eax);
-}
 
 int trace_syscall(int pid){
 	int stat;
@@ -120,3 +166,6 @@ int trace_syscall(int pid){
 	}
 
 }
+
+
+

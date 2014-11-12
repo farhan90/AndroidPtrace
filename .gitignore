@@ -1,11 +1,11 @@
 bin/*
 project.properties
-libs/*
-gen/*
-/obj/
+/libs/*
+/gen/*
+/obj/*
 /libs/
 .classpath
-gen/
+/gen/
 *.py
 
 

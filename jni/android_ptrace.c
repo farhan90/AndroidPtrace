@@ -62,17 +62,17 @@ JNIEXPORT jint JNICALL Java_com_example_androidptrace_PtraceLib_syscall_1trace
 
 
 
-	while(1){
-		if(wait_for_syscall(pid)!=0)
-			break;
-		syscall = ptrace(PTRACE_PEEKUSER, pid, sizeof(long)*ORIG_EAX);
-		if(syscall<0){
-			__android_log_print(ANDROID_LOG_INFO,LOG_TAG,"The errno is %d\n",errno);
-			break;
-
-		}
-		__android_log_print(ANDROID_LOG_INFO,LOG_TAG,"The process made a system call %ld\n",syscall);
-	}
+//	while(1){
+//		if(wait_for_syscall(pid)!=0)
+//			break;
+//		syscall = ptrace(PTRACE_PEEKUSER, pid, sizeof(long)*ORIG_EAX);
+//		if(syscall<0){
+//			__android_log_print(ANDROID_LOG_INFO,LOG_TAG,"The errno is %d\n",errno);
+//			break;
+//
+//		}
+//		__android_log_print(ANDROID_LOG_INFO,LOG_TAG,"The process made a system call %ld\n",syscall);
+//	}
 
 	return 0;
 }

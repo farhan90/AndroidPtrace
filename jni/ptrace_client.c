@@ -1,6 +1,16 @@
 #include <jni.h>
 #include "PtraceLibJNI.h"
 #include "common.h"
+
+#ifdef __86__
+#define filename "syscall_output.txt"
+#endif
+
+#ifdef __x86_64__
+#define filename "syscall64_out.txt"
+#endif
+
+
 /**
  * This is code for our adb client that can utilize the ptrace commands as well.
  */
@@ -8,8 +18,7 @@
 
 int main(int argc, char **argv){
 
-
-	parse_system_call_name("syscall_output.txt");
+	parse_system_call_name("syscall64_out.txt");
 
 	int pid;
 	int i = 1;
