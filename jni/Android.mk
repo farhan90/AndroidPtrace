@@ -21,3 +21,12 @@ LOCAL_SRC_FILES := \
 LOCAL_LDLIBS := -L$(SYSROOT)/usr/lib -llog
 include $(BUILD_EXECUTABLE)
 
+#for compiling the example
+include $(CLEAR_VARS)
+LOCAL_MODULE := ptrace
+LOCAL_SRC_FILES := \
+				ptrace.c
+
+LOCAL_LDLIBS := -L$(SYSROOT)/usr/lib -llog
+include $(BUILD_EXECUTABLE)
+

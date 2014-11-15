@@ -71,6 +71,12 @@ public class MainActivity extends Activity {
 //    }
 //	
 	
+	public void onShellButtonClicked(View v){
+		Log.v("AndroidPtrace", "Clicked the shell button");
+		Intent intent = new Intent(this, ShellActivity.class);
+	    startActivity(intent);
+		
+	}
 	
 	
 	

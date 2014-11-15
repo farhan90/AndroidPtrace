@@ -3,10 +3,18 @@
   android:orientation="vertical"
   android:layout_width="fill_parent"
   android:layout_height="fill_parent">
-  
-	<ListView android:layout_width="fill_parent" 
-	  android:layout_height="fill_parent" 
-	  android:id="@+id/mainListView">
-	</ListView>
+
+    <Button
+        android:id="@+id/shellButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onShellButtonClicked"
+        android:text="@string/shellButton" />
+
+    <ListView
+        android:id="@+id/mainListView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+    </ListView>
 	
 </LinearLayout>

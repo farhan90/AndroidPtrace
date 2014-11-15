@@ -28,7 +28,7 @@ int wait_for_syscall(int pid){
 
 }
 
-JNIEXPORT jint JNICALL Java_com_example_androidptrace_PtraceLib_syscall_1trace
+JNIEXPORT jint JNICALL Java_com_example_androidptrace_PtraceLib_syscall_trace
   (JNIEnv *env, jobject obj, jint pid){
 
 	__android_log_print(ANDROID_LOG_INFO,LOG_TAG,"inside the JNI");
